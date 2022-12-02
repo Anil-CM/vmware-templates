@@ -59,7 +59,7 @@ resource "vsphere_virtual_machine" "vm" {
     "guestinfo.metadata.encoding" = "gzip+base64"
     "guestinfo.userdata.encoding" = "gzip+base64"
     # "guestinfo.metadata"          = file(signal.sh)
-    "guestinfo.userdata" = file(signal.sh)
+    "guestinfo.userdata" = file(signal.tf)
   }
 }
 resource "null_resource" "retry_until_signal" {
@@ -71,6 +71,6 @@ resource "null_resource" "retry_until_signal" {
     }
   # vm_name-randomid
   provisioner "local-exec" {
-    command = "sh retry_signal.sh"
+    command = "sh retry_signal.tf"
   }
 }
